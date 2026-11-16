@@ -172,13 +172,13 @@ const cadRate = r1(sum(cad, p => p.attended) / (cad.length * 7));
 const perfect = stu.filter(p => p.attended === 7);
 const leaveTotal = sum(stu, p => p.leave);
 const big = byArea.filter(a => a.n >= 3 && a.area !== '未填');
-const top = big[0], low = big[big.length - 1];
+const topA = big[0], lowA = big[big.length - 1];
 const topLeaveArea = [...byArea].sort((a, b) => b.leave - a.leave)[0];
 
 // ---- 文字 ----
 const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
 const lede = document.getElementById('lede');
-const parts = ['到 10/31 為止已上 7 堂（全年 9 堂）。學員平均出席率 ', ['b', pct(stuRate)], '，幹部 ', ['b', pct(cadRate)], '。3 人以上的區裡，', ['b', top.area], ' 區最穩定（', ['b', pct(top.rate)], '），', ['b', low.area], ' 區最低（', ['b', pct(low.rate)], '）。最近兩堂請假變多：10/3 有 ', ['b', bySession[5].leave], ' 人、10/31 有 ', ['b', bySession[6].leave], ' 人請假。'];
+const parts = ['到 10/31 為止已上 7 堂（全年 9 堂）。學員平均出席率 ', ['b', pct(stuRate)], '，幹部 ', ['b', pct(cadRate)], '。3 人以上的區裡，', ['b', topA.area], ' 區最穩定（', ['b', pct(topA.rate)], '），', ['b', lowA.area], ' 區最低（', ['b', pct(lowA.rate)], '）。最近兩堂請假變多：10/3 有 ', ['b', bySession[5].leave], ' 人、10/31 有 ', ['b', bySession[6].leave], ' 人請假。'];
 parts.forEach(p => lede.append(Array.isArray(p) ? el(p[0], null, String(p[1])) : p));
 document.querySelectorAll('.n-stu').forEach(e => e.textContent = stu.length);
 document.querySelectorAll('.n-cad').forEach(e => e.textContent = cad.length);
