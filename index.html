@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>115 年度社青班出席分析</title>
+<style>
+:root{
+  --bg:#f6f7f5; --panel:#ffffff; --fg:#1f2421; --muted:#68706b; --line:#e1e5e1;
+  --accent:#2f6f5e; --accent2:#c07a2c; --ok:#3f8f5f; --warn:#d9a23a; --bad:#c2513d; --grid:#e8ebe8;
+  --tipbg:#ffffff; --shadow:0 6px 20px rgba(20,30,25,.12);
+  --serif:"Noto Serif TC","Songti TC","PMingLiU",serif;
+  --sans:"Noto Sans TC","Microsoft JhengHei","PingFang TC",system-ui,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root{
+  --bg:#151917; --panel:#1d2220; --fg:#e7ebe8; --muted:#9aa49e; --line:#2f3633;
+  --accent:#6cc3a6; --accent2:#e6a75a; --ok:#5fb37f; --warn:#e0b04f; --bad:#e2735e; --grid:#2a302d;
+  --tipbg:#242a27; --shadow:0 6px 20px rgba(0,0,0,.45); color-scheme:dark;
+}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans);font-size:15px;line-height:1.6}
+.wrap{max-width:1080px;margin:0 auto;padding:32px 16px 48px;display:flex;flex-direction:column;gap:28px}
+.eyebrow{margin:0;font-size:13px;color:var(--muted);letter-spacing:.08em}
+h1{font-family:var(--serif);font-weight:600;font-size:clamp(26px,4vw,36px);margin:4px 0 8px;text-wrap:balance}
+h2{font-size:18px;font-weight:600;margin:0;text-wrap:balance}
+h3{font-size:15px;font-weight:600;margin:8px 0 0}
+.lede{margin:0;max-width:64ch;line-height:1.9}
+.lede b{font-variant-numeric:tabular-nums;color:var(--accent)}
+.cap{margin:0;color:var(--muted);font-size:13px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
+.tile,.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px;display:flex;flex-direction:column;min-width:0}
+.tile{gap:4px}.card{gap:10px}
+.lbl{font-size:13px;color:var(--muted)}
+.big{font-family:var(--serif);font-size:34px;line-height:1.1;font-variant-numeric:tabular-nums}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:16px}
+.chart{position:relative;width:100%}
+.tip{position:absolute;pointer-events:none;background:var(--tipbg);border:1px solid var(--line);box-shadow:var(--shadow);border-radius:8px;padding:6px 10px;font-size:13px;white-space:nowrap;z-index:5;line-height:1.5}
+.tip div:first-child{font-weight:600}
+svg{display:block}
+svg text{fill:var(--muted);font-size:12px;font-family:var(--sans)}
+svg text.val{fill:var(--fg);font-variant-numeric:tabular-nums}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:13px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.sw{width:12px;height:12px;border-radius:3px;display:inline-block}
+.sw.v,.heat td.v{background:color-mix(in srgb,var(--ok) 80%,transparent)}
+.sw.l,.heat td.l{background:color-mix(in srgb,var(--warn) 65%,transparent)}
+.sw.x,.heat td.x{background:var(--grid)}
+.heatwrap{overflow-x:auto}
+.heat{border-collapse:separate;border-spacing:3px;font-size:13px;font-variant-numeric:tabular-nums}
+.heat th{font-weight:600;color:var(--muted);text-align:center;padding:2px 4px;white-space:nowrap}
+.heat th.l{text-align:left}
+.heat td{text-align:center;height:26px;min-width:38px;border-radius:4px;padding:0 2px}
+.heat td.v{color:#fff}
+.heat td.nm,.heat td.ar{text-align:left;padding:0 8px;white-space:nowrap;min-width:0}
+.heat td.ar{color:var(--fg);font-weight:600}
+.heat td.tot{font-weight:600}
+.heat tr.gap td{height:8px}
+.people{display:flex;flex-wrap:wrap;gap:6px;list-style:none;margin:0;padding:0}
+.people li{border:1px solid var(--line);border-radius:999px;padding:3px 12px;font-size:13px;background:var(--bg);white-space:nowrap}
+.people li small{color:var(--muted);margin-left:6px}
+.people li.bad{border-color:color-mix(in srgb,var(--bad) 60%,transparent)}
+.people li.warn{border-color:color-mix(in srgb,var(--warn) 80%,transparent)}
+.people li.ok{border-color:color-mix(in srgb,var(--ok) 70%,transparent)}
+details{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 18px}
+summary{cursor:pointer;font-weight:600}
+details ul{margin:8px 0 0;padding-left:1.2em;line-height:1.9;max-width:72ch}
+footer{color:var(--muted);font-size:12px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <p class="eyebrow">全真道院 · 基礎忠恕 · 社青班 第 3 期</p>
+    <h1>115 年度社青班出席分析</h1>
+    <p class="lede" id="lede"></p>
+  </header>
+
+  <section class="tiles" id="tiles"></section>
+
+  <section class="card">
+    <h2>每堂出席率：5 月和 8 月掉最多</h2>
+    <p class="cap">每堂打 V 的人數 ÷ 名單總人數（學員 <span class="n-stu"></span> 人、幹部 <span class="n-cad"></span> 人）。滑鼠移到圖上可看人數。</p>
+    <div class="legend"><span><i class="sw" style="background:var(--accent)"></i>學員</span><span><i class="sw" style="background:var(--accent2)"></i>幹部</span></div>
+    <div class="chart" id="trend"></div>
+  </section>
+
+  <div class="grid">
+    <section class="card">
+      <h2>各區出席率排行</h2>
+      <p class="cap">區內所有人的出席人次 ÷（人數 × 7 堂）。括號是人數；只有 1 人的區，出席率不是 100% 就是 0%。</p>
+      <div class="chart" id="areas"></div>
+    </section>
+    <section class="card">
+      <h2>各組出席率</h2>
+      <p class="cap">依表上的第一到第五組計算，含該組輔導。</p>
+      <div class="chart" id="groups"></div>
+      <h3>每堂請假人數</h3>
+      <p class="cap" id="leavecap"></p>
+      <div class="chart" id="leave"></div>
+    </section>
+  </div>
+
+  <section class="card">
+    <h2>需要關懷的學員</h2>
+    <p class="cap">不含輔導。適合在 11/28 前個別聯絡。</p>
+    <h3>幾乎沒來（7 堂只出席 0–1 次）</h3>
+    <ul class="people" id="care-low"></ul>
+    <h3>最近 3 堂（8/29、10/3、10/31）都沒到，之前有來過</h3>
+    <ul class="people" id="care-recent"></ul>
+    <h3>全勤 7/7</h3>
+    <ul class="people" id="perfect"></ul>
+  </section>
+
+  <section class="card">
+    <h2>每位學員的出席紀錄</h2>
+    <div class="legend"><span><i class="sw v"></i>出席 V</span><span><i class="sw l"></i>請假 △</span><span><i class="sw x"></i>未出席</span><span>依區的排名排列，區內依出席次數</span></div>
+    <div class="heatwrap">
+      <table class="heat">
+        <thead><tr><th class="l">區</th><th class="l">姓名</th><th>3/28</th><th>4/25</th><th>5/30</th><th>6/27</th><th>8/29</th><th>10/3</th><th>10/31</th><th>出席</th></tr></thead>
+        <tbody id="heat"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>幹部各組出席率</h2>
+    <p class="cap">來自「上課統計表_幹部」。周逸翔同時是乾副班長和活動組長，只算一次。</p>
+    <div class="chart" id="teams"></div>
+    <h3>7 堂都沒出席的幹部</h3>
+    <ul class="people" id="cad-zero"></ul>
+  </section>
+
+  <details>
+    <summary>資料上的小問題（建議更正原檔）</summary>
+    <ul>
+      <li>黃新評、黃佳瑜、廖凡瑩、廖凡萱沒有填「區」，這裡歸在「未填」。</li>
+      <li>楊雅雲那一列的出席節數公式是空的（實際 7 堂全到）。</li>
+      <li>李芳儀在第四組，但區填「天儲」；這裡依「區」欄計算。</li>
+      <li>原表的「應到人數」為 42（4/25、5/30 為 41），但名單上有 45 人，所以原表的每堂出席率會比這裡高一些。</li>
+      <li>學員表「鄭燕玲」與幹部表「鄭燕伶」可能是同一人，請確認字。</li>
+      <li>「上課總表」的年度與日期還是 114 年的格式，數字也和兩張統計表對不上，這裡沒有採用。</li>
+    </ul>
+  </details>
+
+  <footer>資料來源：115年度社青班-10月.xlsx（上課統計表_學員、上課統計表_幹部），統計至 10/31。出席率只算打 V，請假不算出席。</footer>
+</div>
+
+<script>
+const STUDENTS = [{"name": "周能安", "area": "至善", "group": "第一組", "role": "輔導", "s1": "V", "s2": "V", "s3": "V", "s4": "V", "s5": "V", "s6": "V", "s7": "V"}, {"name": "許庭瑄", "area": "至善", "group": "第一組", "role": "學員", "s1": null, "s2": "V", "s3": null, "s4": "△", "s5": "V", "s6": "V", "s7": "V"}, {"name": "李政儀", "area": "至善", "group": "第一組", "role": "學員", "s1": "V", "s2": "V", "s3": null, "s4": "△", "s5": null, "s6": "V", "s7": "△"}, {"name": "許建緯", "area": "至善", "group": "第一組", "role": "學員", "s1": "V", "s2": "V", "s3": null, "s4": "V", "s5": null, "s6": "V", "s7": "V"}, {"name": "吳湘菱", "area": "至善", "group": "第一組", "role": "學員", "s1": "V", "s2": "V", "s3": null, "s4": "△", "s5": null, "s6": "V", "s7": "△"}, {"name": "陳曉璇", "area": "至善", "group": "第一組", "role": "學員", "s1": "V", "s2": "△", "s3": null, "s4": "△", "s5": "V", "s6": "V", "s7": "V"}, {"name": "史晉龍", "area": "至善", "group": "第一組", "role": "學員", "s1": null, "s2": "V", "s3": null, "s4": "△", "s5": null, "s6": "V", "s7": "V"}, {"name": "許毓玲", "area": "至善", "group": "第一組", "role": "學員", "s1": null, "s2": "V", "s3": null, "s4": "V", "s5": null, "s6": "△", "s7": "V"}, {"name": "張哲瑋", "area": "德容", "group": "第二組", "role": "輔導", "s1": "V", "s2": "V", "s3": "V", "s4": "V", "s5": "V", "s6": "V", "s7": "V"}, {"name": "洪坤成", "area": "至善", "group": "第二組", "role": "學員", "s1": "V", "s2": null, "s3": null, "s4": "V", "s5": null, "s6": "V", "s7": "△"}, {"name": "林虹吟", "area": "至善", "group": "第二組", "role": "學員", "s1": "V", "s2": null, "s3": null, "s4": "V", "s5": null, "s6": "V", "s7": "△"}, {"name": "林姿瑩", "area": "至善", "group": "第二組", "role": "學員", "s1": null, "s2": null, "s3": null, "s4": "V", "s5": "V", "s6": "△", "s7": "V"}, {"name": "許克任", "area": "至善", "group": "第二組", "role": "學員", "s1": "V", "s2": "V", "s3": null, "s4": "V", "s5": null, "s6": "V", "s7": "△"}, {"name": "洪崇耀", "area": "至善", "group": "第二組", "role": "學員", "s1": null, "s2": null, "s3": null, "s4": "△", "s5": null, "s6": "△", "s7": null}, {"name": "陳玉麗", "area": "至善", "group": "第二組", "role": "學員", "s1": "V", "s2": null, "s3": null, "s4": "V", "s5": null, "s6": null, "s7": "△"}, {"name": "黃雅麟", "area": "至善", "group": "第二組", "role": "學員", "s1": "V", "s2": null, "s3": null, "s4": "V", "s5": null, "s6": "△", "s7": "△"}, {"name": "李俊賢", "area": "至善", "group": "第二組", "role": "學員", "s1": null, "s2": null, "s3": null, "s4": "V", "s5": null, "s6": null, "s7": null}, {"name": "林佳臻", "area": "至善", "group": "第二組", "role": "學員", "s1": "V", "s2": null, "s3": null, "s4": "V", "s5": null, "s6": null, "s7": "△"}, {"name": "林淑梅", "area": "天儲", "group": "第三組", "role": "輔導", "s1": "V", "s2": null, "s3": null, "s4": "V", "s5": "V", "s6": null, "s7": "V"}, {"name": "劉俊顯", "area": "天儲", "group": "第三組", "role": "學員", "s1": null, "s2": null, "s3": null, "s4": "V", "s5": null, "s6": null, "s7": null}, {"name": "鄭燕玲", "area": "天儲", "group": "第三組", "role": "學員", "s1": "V", "s2": null, "s3": "V", "s4": "V", "s5": "V", "s6": null, "s7": null}, {"name": "劉子寧", "area": "天儲", "group": "第三組", "role": "學員", "s1": null, "s2": null, "s3": null, "s4": null, "s5": null, "s6": null, "s7": null}, {"name": "蔡政哲", "area": "天儲", "group": "第三組", "role": "學員", "s1": "V", "s2": "V", "s3": null, "s4": null, "s5": null, "s6": null, "s7": null}, {"name": "李鑑勳", "area": "天儲", "group": "第三組", "role": "學員", "s1": "V", "s2": null, "s3": null, "s4": null, "s5": null, "s6": null, "s7": "V"}, {"name": "王欣渝", "area": "天儲", "group": "第三組", "role": "學員", "s1": "V", "s2": "V", "s3": "V", "s4": null, "s5": null, "s6": null, "s7": null}, {"name": "黃新評", "area": "未填", "group": "第三組", "role": "學員", "s1": "V", "s2": null, "s3": null, "s4": null, "s5": null, "s6": null, "s7": "V"}, {"name": "賴美芸", "area": "天選", "group": "第四組", "role": "輔導", "s1": "V", "s2": "V", "s3": null, "s4": "V", "s5": "V", "s6": "V", "s7": "V"}, {"name": "楊雅雲", "area": "天選", "group": "第四組", "role": "學員", "s1": "V", "s2": "V", "s3": "V", "s4": "V", "s5": "V", "s6": "V", "s7": "V"}, {"name": "張家齊", "area": "天選", "group": "第四組", "role": "學員", "s1": null, "s2": "V", "s3": "V", "s4": "V", "s5": "V", "s6": "V", "s7": "V"}, {"name": "賴威任", "area": "天選", "group": "第四組", "role": "學員", "s1": "△", "s2": null, "s3": null, "s4": "V", "s5": null, "s6": "V", "s7": null}, {"name": "甘能州", "area": "天選", "group": "第四組", "role": "學員", "s1": "V", "s2": "△", "s3": null, "s4": "V", "s5": "V", "s6": "△", "s7": "V"}, {"name": "李芳儀", "area": "天儲", "group": "第四組", "role": "學員", "s1": "V", "s2": "V", "s3": "V", "s4": "V", "s5": null, "s6": "△", "s7": "V"}, {"name": "陳曦鈞", "area": "天如", "group": "第四組", "role": "學員", "s1": "V", "s2": "V", "s3": "V", "s4": "V", "s5": "V", "s6": "V", "s7": "V"}, {"name": "黃佳瑜", "area": "未填", "group": "第四組", "role": "學員", "s1": null, "s2": null, "s3": "V", "s4": null, "s5": null, "s6": null, "s7": null}, {"name": "廖凡瑩", "area": "未填", "group": "第四組", "role": "學員", "s1": null, "s2": null, "s3": "V", "s4": null, "s5": null, "s6": null, "s7": null}, {"name": "廖凡萱", "area": "未填", "group": "第四組", "role": "學員", "s1": null, "s2": null, "s3": "V", "s4": null, "s5": null, "s6": null, "s7": null}, {"name": "林淑真", "area": "天選", "group": "第五組", "role": "輔導", "s1": "V", "s2": "V", "s3": "V", "s4": "V", "s5": "V", "s6": "V", "s7": "V"}, {"name": "蔡歐愷", "area": "天隆", "group": "第五組", "role": "學員", "s1": "V", "s2": "V", "s3": "V", "s4": "V", "s5": "V", "s6": "V", "s7": "V"}, {"name": "高廉勝", "area": "天隆", "group": "第五組", "role": "學員", "s1": "V", "s2": "V", "s3": "V", "s4": "V", "s5": null, "s6": "V", "s7": "V"}, {"name": "鄔明清", "area": "德容", "group": "第五組", "role": "學員", "s1": "V", "s2": "V", "s3": null, "s4": "V", "s5": null, "s6": "△", "s7": "△"}, {"name": "楊蓄蒼", "area": "德容", "group": "第五組", "role": "學員", "s1": null, "s2": null, "s3": null, "s4": null, "s5": null, "s6": null, "s7": null}, {"name": "李育振", "area": "精德", "group": "第五組", "role": "學員", "s1": null, "s2": null, "s3": null, "s4": null, "s5": null, "s6": null, "s7": null}, {"name": "鍾東霖", "area": "天參天健", "group": "第五組", "role": "學員", "s1": "V", "s2": "V", "s3": "V", "s4": "V", "s5": "V", "s6": "V", "s7": "V"}, {"name": "張秀鳳", "area": "天隆", "group": "第五組", "role": "學員", "s1": "V", "s2": "V", "s3": "V", "s4": "V", "s5": null, "s6": "V", "s7": "V"}, {"name": "潘崇瑋", "area": "德容", "group": "第五組", "role": "學員", "s1": null, "s2": "V", "s3": null, "s4": null, "s5": null, "s6": null, "s7": null}];
+const CADRES = [{"name": "林明山", "area": "天選", "team": "點傳師", "title": "點傳師", "s1": "V", "s2": "△", "s3": null, "s4": null, "s5": null, "s6": "V", "s7": "V"}, {"name": "張碧雲", "area": "至善", "team": "點傳師", "title": "點傳師", "s1": "V", "s2": "△", "s3": null, "s4": null, "s5": null, "s6": "V", "s7": null}, {"name": "蕭仁德", "area": "天如", "team": "點傳師", "title": "點傳師", "s1": null, "s2": "△", "s3": null, "s4": null, "s5": null, "s6": null, "s7": null}, {"name": "賴錦坤", "area": "天儲", "team": "帶班助理", "title": "帶班助理", "s1": "V", "s2": "V", "s3": null, "s4": "V", "s5": null, "s6": "V", "s7": null}, {"name": "葉志宏", "area": "天選", "team": "班務", "title": "班長", "s1": "V", "s2": "V", "s3": "V", "s4": "V", "s5": "V", "s6": "V", "s7": "V"}, {"name": "周逸翔", "area": "天選", "team": "班務", "title": "乾副班長", "s1": "△", "s2": "V", "s3": "V", "s4": "V", "s5": "V", "s6": "V", "s7": "V"}, {"name": "林淑梅", "area": "天儲", "team": "班務", "title": "坤副班長", "s1": "V", "s2": "V", "s3": null, "s4": "V", "s5": "V", "s6": null, "s7": "V"}, {"name": "黃騰毅", "area": "天隆", "team": "人事", "title": "組長", "s1": null, "s2": null, "s3": null, "s4": null, "s5": null, "s6": null, "s7": null}, {"name": "賴美芸", "area": "天選", "team": "人事", "title": "副組長", "s1": "V", "s2": "V", "s3": "V", "s4": "V", "s5": "V", "s6": "V", "s7": "V"}, {"name": "陳曉璇", "area": "天選", "team": "人事", "title": "組員", "s1": "V", "s2": "△", "s3": null, "s4": "△", "s5": "V", "s6": "V", "s7": "V"}, {"name": "楊舒涵", "area": "天如", "team": "人事", "title": "組員", "s1": null, "s2": null, "s3": null, "s4": null, "s5": null, "s6": null, "s7": null}, {"name": "林詩涵", "area": "天選", "team": "人事", "title": "組員", "s1": "V", "s2": "V", "s3": null, "s4": "V", "s5": "V", "s6": "V", "s7": "V"}, {"name": "林鈺蓉", "area": "天隆", "team": "人事", "title": "組員", "s1": "V", "s2": "V", "s3": null, "s4": "V", "s5": null, "s6": "V", "s7": null}, {"name": "陳彥名", "area": "天隆", "team": "學術", "title": "組長", "s1": "V", "s2": "V", "s3": "V", "s4": "V", "s5": "V", "s6": "V", "s7": null}, {"name": "王冠博", "area": "天儲", "team": "學術", "title": "副組長", "s1": "V", "s2": null, "s3": null, "s4": "V", "s5": "V", "s6": "V", "s7": "V"}, {"name": "鄭燕伶", "area": "天儲", "team": "學術", "title": "組員", "s1": "V", "s2": null, "s3": "V", "s4": "V", "s5": "V", "s6": null, "s7": null}, {"name": "何珈貞", "area": "天選", "team": "活動", "title": "副組長", "s1": "V", "s2": "V", "s3": "V", "s4": "V", "s5": "V", "s6": "V", "s7": "V"}, {"name": "張哲瑋", "area": "德容", "team": "活動", "title": "副組長", "s1": "V", "s2": "V", "s3": "V", "s4": "V", "s5": "V", "s6": "V", "s7": "V"}, {"name": "周能安", "area": "至善", "team": "活動", "title": "副組長", "s1": "V", "s2": "V", "s3": "V", "s4": "V", "s5": "V", "s6": "V", "s7": "V"}, {"name": "許瀚升", "area": "德容", "team": "活動", "title": "組員", "s1": "V", "s2": null, "s3": "V", "s4": "V", "s5": null, "s6": null, "s7": null}, {"name": "王欣渝", "area": "天儲", "team": "活動", "title": "組員", "s1": "V", "s2": "V", "s3": "V", "s4": null, "s5": null, "s6": null, "s7": null}, {"name": "林禹青", "area": "至善", "team": "活動", "title": "組員", "s1": null, "s2": null, "s3": null, "s4": null, "s5": null, "s6": null, "s7": null}, {"name": "林淑真", "area": "天選", "team": "活動", "title": "組員", "s1": "V", "s2": "V", "s3": "V", "s4": "V", "s5": null, "s6": "V", "s7": "V"}, {"name": "張立人", "area": "天儲", "team": "總務", "title": "組長", "s1": "V", "s2": null, "s3": null, "s4": "V", "s5": null, "s6": "V", "s7": "V"}, {"name": "卓子翔", "area": "至善", "team": "總務", "title": "副組長", "s1": "V", "s2": "V", "s3": "V", "s4": "V", "s5": "V", "s6": "V", "s7": "V"}, {"name": "陳幸梅", "area": "天儲", "team": "總務", "title": "組員", "s1": "V", "s2": "V", "s3": "V", "s4": "△", "s5": null, "s6": null, "s7": null}, {"name": "陳熙宗", "area": "天如", "team": "總務", "title": "組員", "s1": "V", "s2": "V", "s3": null, "s4": null, "s5": null, "s6": "V", "s7": "V"}, {"name": "許麗娟", "area": "天參健", "team": "總務", "title": "組員", "s1": "V", "s2": "V", "s3": "V", "s4": "V", "s5": null, "s6": "V", "s7": "V"}, {"name": "張馨予", "area": "天儲", "team": "總務", "title": "組員", "s1": "V", "s2": null, "s3": null, "s4": null, "s5": null, "s6": null, "s7": "V"}, {"name": "張如靈", "area": "天儲", "team": "總務", "title": "組員", "s1": null, "s2": null, "s3": null, "s4": null, "s5": null, "s6": null, "s7": null}, {"name": "李書承", "area": "天儲", "team": "總務", "title": "組員", "s1": "V", "s2": null, "s3": null, "s4": null, "s5": null, "s6": null, "s7": "V"}, {"name": "王志賢", "area": "天儲", "team": "總務", "title": "組員", "s1": "V", "s2": null, "s3": null, "s4": "V", "s5": null, "s6": "V", "s7": null}, {"name": "張懿文", "area": "天儲", "team": "總務", "title": "組員", "s1": null, "s2": "V", "s3": "V", "s4": "V", "s5": null, "s6": "V", "s7": null}, {"name": "孫旭鸞", "area": "天參健", "team": "總務", "title": "組員", "s1": "V", "s2": "V", "s3": null, "s4": "V", "s5": null, "s6": "V", "s7": "V"}];
+const DATES = ['3/28','4/25','5/30','6/27','8/29','10/3','10/31'];
+const SS = ['s1','s2','s3','s4','s5','s6','s7'];
+const NS = 'http://www.w3.org/2000/svg';
+const r1 = x => Math.round(x * 1000) / 10;
+const pct = v => v == null ? '—' : v.toFixed(1) + '%';
+const sum = (a, f) => a.reduce((t, x) => t + f(x), 0);
+const groupBy = (a, f) => { const m = new Map(); a.forEach(x => { const k = f(x); if (!m.has(k)) m.set(k, []); m.get(k).push(x); }); return m; };
+const cv = name => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+
+// ---- 計算 ----
+const stu = STUDENTS.map(p => { const m = SS.map(s => p[s] || ''); return { ...p, marks: m, attended: m.filter(x => x === 'V').length, leave: m.filter(x => x === '△').length, recentMissed: m.slice(4).every(x => x !== 'V') }; });
+const cad = CADRES.map(p => ({ ...p, attended: SS.filter(s => p[s] === 'V').length }));
+const bySession = SS.map((s, i) => { const a = stu.filter(p => p[s] === 'V').length, c = cad.filter(p => p[s] === 'V').length; return { date: DATES[i], n: i + 1, a, c, stuRate: r1(a / stu.length), cadRate: r1(c / cad.length), leave: stu.filter(p => p[s] === '△').length }; });
+const byArea = [...groupBy(stu, p => p.area || '未填')].map(([area, ps]) => { const att = sum(ps, p => p.attended); return { area, n: ps.length, attended: att, possible: ps.length * 7, rate: r1(att / (ps.length * 7)), leave: sum(ps, p => p.leave) }; }).sort((a, b) => b.rate - a.rate || b.n - a.n);
+const byGroup = [...groupBy(stu, p => p.group)].map(([group, ps]) => { const m = ps.find(p => p.role === '輔導'); return { group, mentor: m ? m.name : '', n: ps.length, rate: r1(sum(ps, p => p.attended) / (ps.length * 7)) }; });
+const order = ['點傳師','帶班助理','班務','人事','學術','活動','總務'];
+const byTeam = [...groupBy(cad, p => p.team)].map(([team, ps]) => ({ team, n: ps.length, rate: r1(sum(ps, p => p.attended) / (ps.length * 7)) })).sort((a, b) => order.indexOf(a.team) - order.indexOf(b.team));
+const stuRate = r1(sum(stu, p => p.attended) / (stu.length * 7));
+const cadRate = r1(sum(cad, p => p.attended) / (cad.length * 7));
+const perfect = stu.filter(p => p.attended === 7);
+const leaveTotal = sum(stu, p => p.leave);
+const big = byArea.filter(a => a.n >= 3 && a.area !== '未填');
+const top = big[0], low = big[big.length - 1];
+const topLeaveArea = [...byArea].sort((a, b) => b.leave - a.leave)[0];
+
+// ---- 文字 ----
+const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+const lede = document.getElementById('lede');
+const parts = ['到 10/31 為止已上 7 堂（全年 9 堂）。學員平均出席率 ', ['b', pct(stuRate)], '，幹部 ', ['b', pct(cadRate)], '。3 人以上的區裡，', ['b', top.area], ' 區最穩定（', ['b', pct(top.rate)], '），', ['b', low.area], ' 區最低（', ['b', pct(low.rate)], '）。最近兩堂請假變多：10/3 有 ', ['b', bySession[5].leave], ' 人、10/31 有 ', ['b', bySession[6].leave], ' 人請假。'];
+parts.forEach(p => lede.append(Array.isArray(p) ? el(p[0], null, String(p[1])) : p));
+document.querySelectorAll('.n-stu').forEach(e => e.textContent = stu.length);
+document.querySelectorAll('.n-cad').forEach(e => e.textContent = cad.length);
+document.getElementById('leavecap').textContent = `學員請假共 ${leaveTotal} 人次，其中 ${topLeaveArea.area} 區占 ${topLeaveArea.leave} 人次。`;
+
+const tiles = [
+  ['學員出席率', pct(stuRate), `${stu.length} 人 × 7 堂，含輔導`],
+  ['幹部出席率', pct(cadRate), `${cad.length} 人 × 7 堂`],
+  ['全勤學員（7/7）', perfect.length, '人，含輔導'],
+  ['學員請假人次', leaveTotal, '請假不算出席'],
+  ['尚餘課程', '2 堂', '11/28、12/26 結班']
+];
+const tilesEl = document.getElementById('tiles');
+tiles.forEach(([l, v, n]) => { const t = el('div', 'tile'); t.append(el('span', 'lbl', l), el('span', 'big', String(v)), el('span', 'lbl', n)); tilesEl.append(t); });
+
+// ---- 圖表工具 ----
+function svgEl(tag, attrs, parent) { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.append(e); return e; }
+function txt(parent, x, y, s, attrs = {}) { const t = svgEl('text', { x, y, ...attrs }, parent); t.textContent = s; return t; }
+function tipper(box) {
+  const t = el('div', 'tip'); t.hidden = true; box.append(t);
+  return {
+    show(ev, lines) {
+      t.replaceChildren(...lines.map(s => el('div', null, s))); t.hidden = false;
+      const b = box.getBoundingClientRect();
+      let x = ev.clientX - b.left + 12, y = ev.clientY - b.top + 12;
+      if (x + t.offsetWidth > b.width) x = Math.max(0, ev.clientX - b.left - t.offsetWidth - 12);
+      t.style.left = x + 'px'; t.style.top = y + 'px';
+    },
+    hide() { t.hidden = true; }
+  };
+}
+const rateColor = v => v >= 70 ? 'var(--ok)' : v >= 40 ? 'var(--accent)' : 'var(--bad)';
+
+function hbar(box, rows, o) {
+  box.replaceChildren();
+  const W = Math.max(280, box.clientWidth), rowH = 30, H = rows.length * rowH + 6;
+  const svg = svgEl('svg', { width: '100%', viewBox: `0 0 ${W} ${H}`, role: 'img', 'aria-label': o.aria }, box);
+  let lw = 0;
+  rows.forEach(r => { const t = txt(svg, 0, 0, o.label(r)); lw = Math.max(lw, t.getComputedTextLength()); t.remove(); });
+  lw = Math.min(lw + 10, W * 0.45);
+  const x0 = lw, x1 = W - 56, sx = v => x0 + (x1 - x0) * v / 100;
+  const tip = tipper(box);
+  rows.forEach((r, i) => {
+    const y = i * rowH + 3, v = o.value(r), g = svgEl('g', {}, svg);
+    svgEl('rect', { x: x0, y: y + 5, width: x1 - x0, height: rowH - 12, rx: 3, style: 'fill:var(--grid)' }, g);
+    svgEl('rect', { x: x0, y: y + 5, width: Math.max(1.5, sx(v) - x0), height: rowH - 12, rx: 3, style: 'fill:' + rateColor(v) }, g);
+    txt(g, x0 - 8, y + rowH / 2, o.label(r), { dy: '.35em', 'text-anchor': 'end' });
+    txt(g, sx(v) + 6, y + rowH / 2, pct(v), { dy: '.35em', class: 'val' });
+    g.addEventListener('pointermove', ev => tip.show(ev, o.tip(r)));
+    g.addEventListener('pointerleave', () => tip.hide());
+  });
+}
+
+function trend(box) {
+  box.replaceChildren();
+  const W = Math.max(300, box.clientWidth), H = 260, m = { t: 26, r: 18, b: 30, l: 42 };
+  const svg = svgEl('svg', { width: '100%', viewBox: `0 0 ${W} ${H}`, role: 'img', 'aria-label': '學員與幹部每堂出席率折線圖' }, box);
+  const step = (W - m.l - m.r) / bySession.length;
+  const sx = i => m.l + step * (i + 0.5), sy = v => H - m.b - (H - m.t - m.b) * v / 100;
+  [0, 25, 50, 75, 100].forEach(t => { svgEl('line', { x1: m.l, x2: W - m.r, y1: sy(t), y2: sy(t), style: 'stroke:var(--grid)' }, svg); txt(svg, m.l - 8, sy(t), t + '%', { dy: '.35em', 'text-anchor': 'end' }); });
+  bySession.forEach((r, i) => txt(svg, sx(i), H - 8, r.date, { 'text-anchor': 'middle' }));
+  const series = [{ k: 'stuRate', c: 'var(--accent)' }, { k: 'cadRate', c: 'var(--accent2)' }];
+  series.forEach((s, si) => {
+    svgEl('path', { d: bySession.map((r, i) => (i ? 'L' : 'M') + sx(i) + ',' + sy(r[s.k])).join(''), style: `fill:none;stroke:${s.c};stroke-width:2.5` }, svg);
+    bySession.forEach((r, i) => {
+      svgEl('circle', { cx: sx(i), cy: sy(r[s.k]), r: 4, style: `fill:${s.c};stroke:var(--panel);stroke-width:2` }, svg);
+      const above = r[s.k] >= r[series[1 - si].k];
+      txt(svg, sx(i), sy(r[s.k]) + (above ? -10 : 18), Math.round(r[s.k]) + '%', { 'text-anchor': 'middle', class: 'val' });
+    });
+  });
+  const tip = tipper(box);
+  bySession.forEach((r, i) => {
+    const hit = svgEl('rect', { x: sx(i) - step / 2, y: m.t, width: step, height: H - m.t - m.b, style: 'fill:transparent' }, svg);
+    hit.addEventListener('pointermove', ev => tip.show(ev, [`${r.date}　第 ${r.n} 堂`, `學員 ${r.a}/${stu.length} 人（${pct(r.stuRate)}）`, `幹部 ${r.c}/${cad.length} 人（${pct(r.cadRate)}）`, `學員請假 ${r.leave} 人`]));
+    hit.addEventListener('pointerleave', () => tip.hide());
+  });
+}
+
+function leaveChart(box) {
+  box.replaceChildren();
+  const W = Math.max(280, box.clientWidth), H = 150, m = { t: 22, b: 24, l: 8, r: 8 };
+  const svg = svgEl('svg', { width: '100%', viewBox: `0 0 ${W} ${H}`, role: 'img', 'aria-label': '每堂學員請假人數長條圖' }, box);
+  const step = (W - m.l - m.r) / bySession.length, bw = step * 0.62;
+  const max = Math.max(1, ...bySession.map(r => r.leave)), sy = v => H - m.b - (H - m.t - m.b) * v / max;
+  const tip = tipper(box);
+  bySession.forEach((r, i) => {
+    const cx = m.l + step * (i + 0.5);
+    const b = svgEl('rect', { x: cx - bw / 2, y: sy(r.leave), width: bw, height: sy(0) - sy(r.leave), rx: 3, style: 'fill:var(--warn)' }, svg);
+    b.addEventListener('pointermove', ev => tip.show(ev, [r.date, `學員請假 ${r.leave} 人`]));
+    b.addEventListener('pointerleave', () => tip.hide());
+    txt(svg, cx, sy(r.leave) - 5, r.leave, { 'text-anchor': 'middle', class: 'val' });
+    txt(svg, cx, H - 6, r.date, { 'text-anchor': 'middle' });
+  });
+}
+
+function chips(id, people, cls, sub) {
+  const ul = document.getElementById(id);
+  ul.replaceChildren(...people.map(p => { const li = el('li', cls, p.name); li.append(el('small', null, sub(p))); return li; }));
+  if (!people.length) ul.append(el('li', null, '沒有'));
+}
+
+function heat() {
+  const rank = new Map(byArea.map((a, i) => [a.area, i]));
+  const rows = stu.slice().sort((a, b) => rank.get(a.area || '未填') - rank.get(b.area || '未填') || b.attended - a.attended);
+  const tb = document.getElementById('heat'); let last = null;
+  rows.forEach(p => {
+    const area = p.area || '未填';
+    if (last !== null && area !== last) { const g = el('tr', 'gap'); g.append(el('td')); tb.append(g); }
+    const tr = el('tr');
+    tr.append(el('td', 'ar', area !== last ? area : ''), el('td', 'nm', p.name + (p.role === '輔導' ? '（輔導）' : '')));
+    p.marks.forEach(m => tr.append(el('td', m === 'V' ? 'v' : m === '△' ? 'l' : 'x', m)));
+    tr.append(el('td', 'tot', String(p.attended)));
+    tb.append(tr); last = area;
+  });
+}
+
+function drawAll() {
+  trend(document.getElementById('trend'));
+  hbar(document.getElementById('areas'), byArea, { aria: '各區出席率長條圖', label: r => `${r.area}（${r.n}）`, value: r => r.rate, tip: r => [r.area + ' 區', `${r.n} 人，出席 ${r.attended}/${r.possible} 人次`, `出席率 ${pct(r.rate)}`, `請假 ${r.leave} 人次`] });
+  hbar(document.getElementById('groups'), byGroup, { aria: '各組出席率長條圖', label: r => r.group, value: r => r.rate, tip: r => [r.group, `輔導：${r.mentor || '—'}`, `${r.n} 人，出席率 ${pct(r.rate)}`] });
+  leaveChart(document.getElementById('leave'));
+  hbar(document.getElementById('teams'), byTeam, { aria: '幹部各組出席率長條圖', label: r => `${r.team}（${r.n}）`, value: r => r.rate, tip: r => [r.team, `${r.n} 人，出席率 ${pct(r.rate)}`] });
+}
+
+chips('care-low', stu.filter(p => p.role !== '輔導' && p.attended <= 1).sort((a, b) => a.attended - b.attended), 'bad', p => `${p.area} · ${p.attended}/7`);
+chips('care-recent', stu.filter(p => p.role !== '輔導' && p.attended >= 2 && p.recentMissed).sort((a, b) => b.attended - a.attended), 'warn', p => `${p.area} · ${p.attended}/7${p.leave ? ' · 假' + p.leave : ''}`);
+chips('perfect', perfect, 'ok', p => p.area + (p.role === '輔導' ? ' · 輔導' : ''));
+chips('cad-zero', cad.filter(p => p.attended === 0), 'bad', p => `${p.team}${p.title && p.title !== p.team ? p.title : ''} · ${p.area}`);
+heat();
+drawAll();
+let rt; window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(drawAll, 150); });
+</script>
+</body>
+</html>
